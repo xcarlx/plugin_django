@@ -1,6 +1,5 @@
-=====
-BOOTSTRAP 5 - MODULO DE BOOTSTRAP 5 CRUD, SELECT2 AND TABLE
-=====
+Modulo
+==========
 
 Modulo es una aplicacion de Django Para implementar el crud y tablas en bootstrap 5.2
 
