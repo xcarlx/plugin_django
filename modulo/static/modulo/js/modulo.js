@@ -1,4 +1,4 @@
-import ListaView from "./lista.js";
+import ListaView from "./lista.min.js";
 
 class Modelo {
 
@@ -61,16 +61,8 @@ class Modelo {
                 } catch (e) {
                     element.hideloader();
                     if (modal) {
-                        // let modal_instance = bootstrap.Modal.getInstance(modal);
-                        // modal_instance.hide();
-                        // this.openModal(modal, formulario, formulario.getAttribute('action'), modal.querySelector(".modal-title").innerHTML, {}).then(r => r)
-                        // setTimeout(() => {
                         modal.querySelector(".modal-body").innerHTML = resultado;
-                        // }, 200)
                     }
-                    // this.toastShow(document.getElementById("toastLoading"), "Error", {
-                    //     ms: 3000, bg: "bg-danger"
-                    // });
                     return {
                         estado: false, valor: resultado
                     }
@@ -254,16 +246,15 @@ export default Modelo;
 
 export function ajax_select2(url) {
     return {
-        url: url,
-        data: function (params) {
+        url: url, data: function (params) {
             // Query parameters will be ?search=[term]&page=[page]
             return {
-                search: params.term,
-                page: params.page || 1
+                search: params.term, page: params.page || 1
             };
         }
     }
 }
+
 
 export function seleccionar_menu() {
     let navs = document.querySelectorAll(".nav-link");

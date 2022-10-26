@@ -35,7 +35,6 @@ class ListaView {
         this.pagina = "";
         this.buscar = "";
 
-
         this.click_row_select = (pk) => {
 
         }
@@ -113,30 +112,25 @@ class ListaView {
         const btnEditar = this.contenedor.querySelectorAll(".btnEditar");
         const btnEliminar = this.contenedor.querySelectorAll(".btnEliminar");
         if (btnAgregar) {
-            btnAgregar.onclick = () => {
-                if (url_crear) {
-                    this.open_modal(url_crear, "Nuevo " + titulo);
-                }
-            }
+            this.boton_modal(btnAgregar, url_crear, "Nuevo " + titulo)
         }
         if (btnEditar) {
             btnEditar.forEach(element => {
-                element.addEventListener("click", () => {
-                    if (url_editar) {
-                        this.open_modal(url_editar.replace("/0", "/" + element.dataset.pk), "Editar " + titulo);
-                    }
-                });
+                this.boton_modal(element, url_editar.replace("/0", "/" + element.dataset.pk), "Editar " + titulo)
             })
         }
         if (btnEliminar) {
             btnEliminar.forEach(element => {
-                element.addEventListener("click", () => {
-                    if (url_eliminar) {
-                        this.open_modal(url_eliminar.replace("/0", "/" + element.dataset.pk), "Eliminar " + titulo);
-                        this.pagina = "";
-                    }
-                });
+                this.boton_modal(element, url_eliminar.replace("/0", "/" + element.dataset.pk), "Eliminar " + titulo)
             })
+        }
+    }
+
+    boton_modal(element, url, titulo) {
+        element.onclick = () => {
+            if (url) {
+                this.open_modal(url, titulo);
+            }
         }
     }
 }
