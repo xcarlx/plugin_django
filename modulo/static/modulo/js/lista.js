@@ -35,7 +35,7 @@ class ListaView {
         this.pagina = "";
         this.buscar = "";
 
-        this.click_row_select = (pk) => {
+        this.click_row_select = () => {
 
         }
     }
@@ -52,7 +52,22 @@ class ListaView {
         });
     }
 
-    open_modal(url, titulo) {
+    /**
+     * open_modal
+     * options = {
+     *     modal_lg : true or modal_xl : true or modal_sm : true
+     * }
+     * */
+    open_modal(url, titulo, options = {}) {
+        if (options.modal_lg) {
+            this.modal.querySelector(".modal-dialog").classList.add("modal-lg");
+        } else if (options.modal_xl) {
+            this.modal.querySelector(".modal-dialog").classList.add("modal-xl");
+        } else if (options.modal_sm) {
+            this.modal.querySelector(".modal-dialog").classList.add("modal-sm");
+        } else {
+            this.modal.querySelector(".modal-dialog").classList.remove("modal-xl", "modal-lg", "modal-sm");
+        }
         this.contenedor.showloader();
         this.modelo.openModal(this.modal, this.formulario, url, titulo).then(() => this.post_modal());
     }
@@ -107,29 +122,29 @@ class ListaView {
         }
     }
 
-    botones(url_crear = "", url_editar = "", url_eliminar = "", titulo) {
+    botones(url_crear = "", url_editar = "", url_eliminar = "", titulo, options = {}) {
         const btnAgregar = this.contenedor.querySelector("#btnAgregar");
         const btnEditar = this.contenedor.querySelectorAll(".btnEditar");
         const btnEliminar = this.contenedor.querySelectorAll(".btnEliminar");
         if (btnAgregar) {
-            this.boton_modal(btnAgregar, url_crear, "Nuevo " + titulo)
+            this.boton_modal(btnAgregar, url_crear, "Nuevo " + titulo, options)
         }
         if (btnEditar) {
             btnEditar.forEach(element => {
-                this.boton_modal(element, url_editar.replace("/0", "/" + element.dataset.pk), "Editar " + titulo)
+                this.boton_modal(element, url_editar.replace("/0", "/" + element.dataset.pk), "Editar " + titulo, options)
             })
         }
         if (btnEliminar) {
             btnEliminar.forEach(element => {
-                this.boton_modal(element, url_eliminar.replace("/0", "/" + element.dataset.pk), "Eliminar " + titulo)
+                this.boton_modal(element, url_eliminar.replace("/0", "/" + element.dataset.pk), "Eliminar " + titulo, options)
             })
         }
     }
 
-    boton_modal(element, url, titulo) {
+    boton_modal(element, url, titulo, options = {}) {
         element.onclick = () => {
             if (url) {
-                this.open_modal(url, titulo);
+                this.open_modal(url, titulo, options);
             }
         }
     }
